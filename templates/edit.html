@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if watchlist != []%}
+<h2>My Watchlist</h2>
+<div>
+    <ul>
+        {%for movie in watchlist %}
+            <li>
+                {{movie}}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 <h2>Edit My Watchlist</h2>
 
 <form action="/add" method="post">
@@ -13,6 +26,7 @@
 </form>
 
 <form action="/crossoff" method="post">
+    {% if watchlist != [] %}
     <label>
         I want to cross off
         <select name="crossed-off-movie">
@@ -24,6 +38,7 @@
         from my watchlist.
     </label>
     <input type="submit" value="Cross It Off"/>
+    {% endif %}
 </form>
 
 {% if error %}
