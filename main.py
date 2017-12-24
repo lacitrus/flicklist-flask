@@ -9,6 +9,8 @@ app.config['DEBUG'] = True      # displays runtime errors in the browser, too
 def index():
     # choose a movie by invoking our new function
     movie = get_random_movie()
+    movie2 = get_random_movie()
+
 
     # build the response string
     content = "<h1>Movie of the Day</h1>"
@@ -18,7 +20,7 @@ def index():
 
     content += "<h1>Tomorrow's Movie</h1>"
     content += "<ul>"
-    content += "<li>" + movie + "</li>"
+    content += "<li>" + movie2 + "</li>"
     content += "</ul>"
 
     # TODO: pick another random movie, and display it under
