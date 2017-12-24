@@ -14,10 +14,13 @@ terrible_movies = [
     "Starship Troopers"
 ]
 
+current_watchlist = ["Star Wars", "Minions", "Freaky Friday", "My Favorite Martian"]
+
 def get_current_watchlist():
     # returns user's current watchlist--hard coded for now
     # return [ "Star Wars", "Minions", "Freaky Friday", "My Favorite Martian" ]
-    return []
+    # return []
+    return current_watchlist
 
 
 @app.route("/crossoff", methods=['POST'])
@@ -33,6 +36,8 @@ def crossoff_movie():
         return redirect("/?error=" + error)
 
     # if we didn't redirect by now, then all is well
+    index_num = current_watchlist.index(crossed_off_movie) # extra work of removing movie from the list as suggested by Teaching Fellow Patrick
+    current_watchlist.pop()
     return render_template('crossoff.html', crossed_off_movie=crossed_off_movie)
 
 @app.route("/add", methods=['POST'])
@@ -56,11 +61,13 @@ def add_movie():
     # TODO:
     # Create a template called add-confirmation.html inside your /templates directory
     # Use that template to render the confirmation message instead of this temporary message below
+    current_watchlist.append(new_movie) # Same extra work to add movie to the list suggested by Patrick
     return render_template('add-confirmation.html', new_movie = new_movie)
 
 # TODO:
 # Modify the edit.html file to display the watchlist in an unordered list with bullets in front of each movie.
 # Put the list between "Flicklist" and "Edit My Watchlist" under this heading: <h2>My Watchlist</h2>
+# Done: Yi
 
 # TODO:
 # Change get_current_watchlist to return []. This simulates a user with an empty watchlist.
@@ -68,6 +75,7 @@ def add_movie():
 #  First: Hide the <h2>My Watchlist</h2> and it's unordered list.
 #  Second: Hide the crossoff form, since there are no movies to cross off. 
 # Then you can change get_current_watchlist back to the list of hard-coded movies.
+# Done: Yi
 
 @app.route("/")
 def index():
