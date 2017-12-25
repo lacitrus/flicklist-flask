@@ -94,12 +94,16 @@ def add_movie():
     
     # TODO 
     # if the user typed nothing at all, redirect and tell them the error
-
+    if not new_movie:
+        error = "Please specify the name of the movie you want to add!"
+        return redirect('/?error=' + error)
     # TODO 
     # if the user wants to add a terrible movie, redirect and tell them not to add it b/c it sucks
-
+    if new_movie in terrible_movies:
+        error = "Trust me, you don't want to add '{0}' to your Watchlist."
+        return redirect('/?error=' + error.format(new_movie))
     # build response content
-    new_movie_element = "<strong>" + new_movie + "</strong>"
+    new_movie_element = "<strong>" + cgi.escape(new_movie) + "</strong>"
     sentence = new_movie_element + " has been added to your Watchlist!"
     content = page_header + "<p>" + sentence + "</p>" + page_footer
 
